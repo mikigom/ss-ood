@@ -1,24 +1,18 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import os
-import pickle
 import argparse
 import time
 import torch
-import torch.nn as nn
 import torch.backends.cudnn as cudnn
 import torchvision.transforms as trn
 import torchvision.transforms.functional as trnF
 import torchvision.datasets as dset
-from models.resnet import resnet18
 from models.cbam.model_resnet import ResidualNet
 import torch.nn.functional as F
 import opencv_functional as cv2f
 import cv2
 import itertools
-import torch.utils.model_zoo as model_zoo
-import math
-import random
 
 parser = argparse.ArgumentParser(description='Trains a one-class model',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
