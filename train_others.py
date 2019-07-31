@@ -1,6 +1,5 @@
 import os
 import argparse
-import time
 
 import numpy as np
 import torch
@@ -160,7 +159,7 @@ def test(test_loader, model, epoch, args):
                 else:
                     anomaly_writer.write("{}, {}\n".format(normality_score, 0.))
 
-    metric(normal_writer, anomaly_writer, epoch, True)
+    metric(normal_writer_path, anomaly_writer_path, epoch, True)
 
 
 if __name__ == '__main__':

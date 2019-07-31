@@ -7,6 +7,10 @@ from torchvision.datasets import FashionMNIST, CIFAR10, MNIST
 
 
 class FashionMNIST_Redefined(FashionMNIST):
+    """
+    classes = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal',
+           'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+
     classes = ['Ankle boot',
                'Bag',
                'Coat',
@@ -17,11 +21,25 @@ class FashionMNIST_Redefined(FashionMNIST):
                'Sneaker',
                'T-shirt/top',
                'Trouser']
+    """
+
+    re_mapping_classes = {0: 8,
+                          1: 9,
+                          2: 4,
+                          3: 3,
+                          4: 2,
+                          5: 5,
+                          6: 6,
+                          7: 7,
+                          8: 1,
+                          9: 0}
 
     def __init__(self, in_class: int, root: str, transform, is_training: bool):
         from tqdm import tqdm
         tqdm.monitor_interval = 0
         super(FashionMNIST_Redefined, self).__init__(root, train=is_training, transform=transform, download=True)
+
+        self.targets = [FashionMNIST_Redefined.re_mapping_classes[target] for target in self.targets]
 
         if is_training:
             idxs_in_class = [i for i, target in enumerate(self.targets) if target == in_class]
