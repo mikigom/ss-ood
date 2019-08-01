@@ -39,7 +39,7 @@ class FashionMNIST_Redefined(FashionMNIST):
         tqdm.monitor_interval = 0
         super(FashionMNIST_Redefined, self).__init__(root, train=is_training, transform=transform, download=True)
 
-        self.targets = [FashionMNIST_Redefined.re_mapping_classes[target] for target in self.targets]
+        self.targets = [FashionMNIST_Redefined.re_mapping_classes[int(target)] for target in self.targets]
 
         if is_training:
             idxs_in_class = [i for i, target in enumerate(self.targets) if target == in_class]
