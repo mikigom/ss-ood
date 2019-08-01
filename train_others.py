@@ -80,7 +80,6 @@ def main(args):
     cudnn.benchmark = True
 
     criterion = nn.CrossEntropyLoss()
-    """
     optimizer = torch.optim.Adam(
         model.parameters(), args.learning_rate,
         weight_decay=args.weight_decay, amsgrad=True
@@ -89,6 +88,7 @@ def main(args):
     optimizer = torch.optim.SGD(
         model.parameters(), args.learning_rate, momentum=args.momentum,
         weight_decay=args.weight_decay, nesterov=True)
+    """
 
     train_loader = torch.utils.data.DataLoader(
         train_dataset,
@@ -177,13 +177,13 @@ if __name__ == '__main__':
     parser.add_argument('--result_dir', '-rd', type=str, default='results/', help='')
     parser.add_argument('--dataset_path', '-dp', type=str, default='./data', help='')
     # WideResNet
-    parser.add_argument('--wrn_depth', '-wrn_d', type=int, default=10, help='')
+    parser.add_argument('--wrn_depth', '-wrn_d', type=int, default=16, help='')
     parser.add_argument('--wrn_width', '-wrn_w', type=int, default=4, help='')
     # Temperature Scaling
     parser.add_argument('--temperature', '-t', type=float, default=1., help='')
     # Optimization options
     parser.add_argument('--epochs', '-e', type=int, default=10, help='Number of epochs to train.')
-    parser.add_argument('--learning_rate', '-lr', type=float, default=1e-1, help='The initial learning rate.')
+    parser.add_argument('--learning_rate', '-lr', type=float, default=5e-4, help='The initial learning rate.')
     parser.add_argument('--batch_size', '-b', type=int, default=128, help='Batch size.')
     parser.add_argument('--momentum', type=float, default=0.9, help='Momentum.')
     parser.add_argument('--weight_decay', '-wd', type=float, default=0.0005, help='Weight decay (L2 penalty).')
