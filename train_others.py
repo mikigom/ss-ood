@@ -144,7 +144,7 @@ def test(test_loader, model, epoch, args):
         for images_, y in test_loader:
             images = apply_transformation_with_order(images_)
             logits = model(images)
-            softmaxs = torch.nn.functional.softmax(logits, dim=1)
+            softmaxs = torch.nn.functional.softmax(logits/args.temperature, dim=1)
 
             y_ = torch.split(softmaxs, N_TRANSFORMATION, dim=0)
 
@@ -179,6 +179,8 @@ if __name__ == '__main__':
     # WideResNet
     parser.add_argument('--wrn_depth', '-wrn_d', type=int, default=10, help='')
     parser.add_argument('--wrn_width', '-wrn_w', type=int, default=4, help='')
+    # Temperature Scaling
+    parser.add_argument('--temperature', '-t', type=float, default=1., help='')
     # Optimization options
     parser.add_argument('--epochs', '-e', type=int, default=10, help='Number of epochs to train.')
     parser.add_argument('--learning_rate', '-lr', type=float, default=1e-1, help='The initial learning rate.')
